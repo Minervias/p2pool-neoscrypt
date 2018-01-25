@@ -6,9 +6,9 @@ from twisted.internet import defer
 from .. import data, helper
 from p2pool.util import pack
 
-P2P_PREFIX = 'b93a2a3c'.decode('hex')
+P2P_PREFIX = '3c2a3ab9'.decode('hex')
 P2P_PORT = 14520
-ADDRESS_VERSION = 76
+ADDRESS_VERSION = 102
 RPC_PORT = 8818
 RPC_CHECK = defer.inlineCallbacks(lambda daemon: defer.returnValue(
   'innovaaddress' in (yield daemon.rpc_help()) and
