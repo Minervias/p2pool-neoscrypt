@@ -9,39 +9,6 @@ Linux:
 * sudo apt-get install python-zope.interface python-twisted python-twisted-web
 * sudo apt-get install python-argparse # if on Python 2.6
 
-Windows:
-* Install Python 2.7: http://www.python.org/getit/
-* Install Twisted: http://twistedmatrix.com/trac/wiki/Downloads
-* Install Zope.Interface: http://pypi.python.org/pypi/zope.interface/3.8.0
-* Install python win32 api: http://sourceforge.net/projects/pywin32/files/pywin32/Build%20218/
-* Install python win32 api wmi wrapper: https://pypi.python.org/pypi/WMI/#downloads
-* Unzip the files into C:\Python27\Lib\site-packages
-
-Running P2Pool:
--------------------------
-To use P2Pool, you must be running your own local coin daemon. For standard
-configurations, using P2Pool should be as simple as:
-
-    python run_p2pool.py
-
-Then run your miner program, connecting to 127.0.0.1 on the default worker
-port with any username and password.
-
-If you are behind a NAT, you should enable TCP port forwarding on your
-router. Forward port 9333 to the host running P2Pool.
-
-Run for additional options.
-
-    python run_p2pool.py --help
-
-Official wiki :
--------------------------
-https://en.bitcoin.it/wiki/P2Pool
-
-Alternate web front end :
--------------------------
-* https://github.com/hardcpp/P2PoolExtendedFrontEnd
-
 Notes for NeoScrypt:
 =========================
 Requirements:
@@ -53,40 +20,79 @@ Linux:
 
     cd neoscrypt
     sudo python setup.py install
+	
+Notes for Innovacoin Daemon:
+=========================
+Requirements:
+-------------------------
+The Innovacoin Daemon must be running on or accessible from the p2pool application. 
+Port 14520 has been used for Innovad. 
 
-Windows (mingw):
-* Install MinGW: http://www.mingw.org/wiki/Getting_Started
-* Install Python 2.7: http://www.python.org/getit/
+To install the Innova Daemon:
 
-In bash type this:
+**Download and extract**
+https://github.com/innovacoin/innova
 
-    cd neoscrypt
-    C:\Python27\python.exe setup.py build --compile=mingw32 install
+	cd innova
+    ./autogen.sh
+    ./configure
+    make
+	make install # optional
+	sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils
 
-Windows (microsoft visual c++)
-* Open visual studio console
+**To run the coin Daemon**
+	
+	cd innova/src
+	./innovad -daemon
 
-In bash type this:
+**To see sync status**
+	
+	cd innova/src
+	./innova-cli getinfo
 
-    SET VS90COMNTOOLS=%VS110COMNTOOLS%	           # For visual c++ 2012
-    SET VS90COMNTOOLS=%VS100COMNTOOLS%             # For visual c++ 2010
-    cd litecoin_scrypt
-    C:\Python27\python.exe setup.py build --compile=mingw32 install
 
-If you run into an error with unrecognized command line option '-mno-cygwin', see this:
-http://stackoverflow.com/questions/6034390/compiling-with-cython-and-mingw-produces-gcc-error-unrecognized-command-line-o
+Running P2Pool:
+-------------------------
+To use P2Pool, you must be running your own local coin daemon. For standard
+configurations, using P2Pool should be as simple as:
 
-Running P2Pool for Phoenixcoin:
+    python run_p2pool.py --net innovacoin
+
+Then run your miner program, connecting to 127.0.0.1 on the default worker
+port with any username and password.
+
+If you are behind a NAT, you should enable TCP port forwarding on your
+router. Forward port 9333 to the host running P2Pool.
+
+**To open the ports on your Linux machine use command:**
+
+sudo ufw allow 9333 - p2pool
+sudo ufw allow 14777 - Worker Port
+
+**To check the status of the firewall:**
+
+sudo ufw status
+
+Run for additional options.
+
+    python run_p2pool.py --help
+	
+	
+**Running P2Pool for Innovacoin:**
 -------------------------------
-Run P2Pool with the "--net phoenixcoin" option.
-Run your miner program, connecting to 127.0.0.1 on port 10554.
-Forward port 10555 on your router to any PXC nodes running P2Pool.
+Run P2Pool with the "--net innovacoin" option.
+Run your miner program, connecting to 127.0.0.1 on port 14520.
+Forward port 14519 on your router to any PXC nodes running P2Pool.	
+	
+	
+Official wiki :
+-------------------------
+https://en.bitcoin.it/wiki/P2Pool
 
-Running P2Pool for Feathercoin:
--------------------------------
-Run P2Pool with the "--net feathercoin" option.
-Run your miner program, connecting to 127.0.0.1 on port 19327.
-Forward port 19339 on your router to any FTC nodes running P2Pool.
+Alternate web front end :
+-------------------------
+* https://github.com/justino/p2pool-ui-punchy
+* https://github.com/hardcpp/P2PoolExtendedFrontEnd
 
 Sponsors:
 -------------------------
